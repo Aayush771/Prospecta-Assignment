@@ -1,0 +1,23 @@
+1. How will you tackle the challenge above?
+ To solve this problem first I need to read the data from CSV file, and then with
+ including cell no I have used  Maps in Java I will store all the data in map 
+ and used variables to track the cell no after we had resolved all
+ dependencies of value in the map then with the help of a print writer in Java i will
+ create the new output file and print the output in that CSV file.
+
+2. What type of errors you would you check for?
+there are mainly two types of runtime exception
+1. Input format errors 
+2 .Formula parsing errors
+3. Arthamitc error reference
+4. Invalid cell reference
+5. Circular reference 
+
+3. How might a user break your code?
+1. By providing invalid cell reference 
+2. By providing the invalid inputs 
+3. By Providing the invalid formulas 
+4. By Circular reference cells or invalid cells.
+5 By Providing the large input data which can't be hold
+6 By Providing the Case sensitive cell references.
+

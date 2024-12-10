@@ -1,71 +1,97 @@
 import java.io.*;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String line = "";
-        BufferedReader br = new BufferedReader(new FileReader("input.csv"));
-        Map<String,String> map = new LinkedHashMap<>();
-        while ((line = br.readLine()) != null)   //returns a Boolean value
-        {
-            String[] employee = line.replaceAll(" ","").split(",");    // use comma as separator
+        
 
-            for(String i:employee){
-                String[] str = i.split(":");
-                map.put(str[0],str[1]);
-            }
+          Map<String,String> map = readCSVFile("Question2\\input.csv");
+       
             for(String j:map.keySet()){
                 String str = map.get(j);
                 if(str.contains("=")){
                     String str1 =  str.replace("=","").replaceAll(" ","");
 
-                    String[] str2 =  str1.split("\\+");
+                    String[] str2 = str1.split("[+\\-*/]");
+
+                    
                     if(!map.containsKey(str2[0]) && !map.containsKey(str2[1])){
-                        int value = Integer.parseInt(str2[0])+Integer.parseInt(str2[1]);
+                        int a = Integer.parseInt(str2[0]);
+                        int b = Integer.parseInt(str2[1]);
+                        int value = evaluateFormula(a,b,str1);
                         map.put(j,value+"");
                     }
                     else if(map.containsKey(str2[0]) && map.containsKey(str2[1])){
-                        String a = map.get(str2[0]);
-                        String b = map.get(str2[1]);
-                        int value = Integer.parseInt(a)+Integer.parseInt(b);
+                        Integer a = Integer.parseInt(map.get(str2[0]));
+
+                        Integer b = Integer.parseInt(map.get(str2[1]));
+                        int value =evaluateFormula(a,b,str1);
                         map.put(j,value+"");
                     }
                     else if(map.containsKey(str2[1]) && !map.containsKey(str2[0])){
-                        String a = map.get(str2[1]);
-                        int value = Integer.parseInt(a)+Integer.parseInt(str2[0]);
+                        Integer a = Integer.parseInt(map.get(str2[1]));
+                        Integer b = Integer.parseInt(str2[0]);
+                        int value = evaluateFormula(b,a,str1);
                         map.put(j,value+"");
                     }
                 }
-            }
+            
 
         }
-        File csvFile = new File("output.csv");
-        PrintWriter printWriter = new PrintWriter(csvFile);
-        for (String data : map.keySet()) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(data+":");
-            sb.append(map.get(data));
-            sb.append(",");
-            printWriter.write(sb.toString());
+
+  //      System.out.println(map);
+
+        writeCSVFile(map, "Question2\\output.csv");
+        
+    }
+
+    public static Map<String, String> readCSVFile(String filePath) throws IOException {
+        Map<String, String> spreadsheet = new LinkedHashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            int row = 1;
+
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                char clmLtr = 'A';
+
+                for (String value : values) {
+                    String cellId = clmLtr + String.valueOf(row);
+                    spreadsheet.put(cellId, value.trim());
+                    clmLtr++;
+                }
+                row++;
+            }
         }
-        printWriter.close();
+        return spreadsheet;
+    }
+    public static Integer evaluateFormula(Integer a, Integer b, String formula) {
+      
+             Integer result = 0;
+         
+            if (formula.contains("-")) {
+                result = a - b;                
+            } else if (formula.contains("+")) {
+                result = a + b;
+            } else if (formula.contains("*")) {
+                result = a * b;            
+            } else if (formula.contains("/")) {
+                result = a / b;               
+            }
+        
+
+        return result;
+    }
+
+    public static void writeCSVFile(Map<String, String> csvMap, String filePath) throws IOException {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
+            for (Map.Entry<String, String> entry : csvMap.entrySet()) {
+                String cellId = entry.getKey();
+                String value = entry.getValue();
+                pw.println(cellId + "," + value);
+            }
+        }
     }
 }
-/*
-1.How will you tackle the challenge above?
- To solve this problem first I need to read the data from csv file then with
- the use of Maps in java i will store all the data in map the i will resolve all
- dependencies of value in map then with the help of printwriter in java i will
- create the new output file and print the output in that csv file.
-
-2.What type of errors you would you check for?
-there are mainly two types of runtime exception
-1.File not found exception
-2.IO exception
-
-3.How might a user break your code?
-this code can be broken when data is given in random order.
-
-
-*/
