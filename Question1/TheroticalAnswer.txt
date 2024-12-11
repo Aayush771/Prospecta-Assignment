@@ -1,0 +1,22 @@
+Important Security and Reliability Checklist While Building Or Consuming an API
+
+In the following section some key considerations are important to make sure the API that is being built or consumed is secured and reliable: 
+
+1. Authentication and Authorization
+API consumers should be authenticated and authorized by using OAuth2, API keys or JWT tokens so that access to some of the endpoints is given only to a select few.
+
+2. Data Validation
+Injection attacks like SQL injection, XSS can be avoided by sanitizing data and validating inputs. 
+
+3.Validation frameworks like JSR-303 can be utilized to request validation.
+
+4. Rate Limiting
+Fair use of the API can be ensured by employing rate limiting for petitons by implementing tokens or request quotas, hence preventing abuse of the API.
+
+5. Error Handling
+Utilize standard HTTP status codes 400 Bad Request, 401 Unauthorized, 500 Internal Server Error to explain users the exact issues hence providing users with informative error messages. 
+ 
+6. Data Encryption 
+Better protection against eavesdropping or man-in-the-middle attacks can be achieved by encrypting data in use with HTTPS on the network. 
+Encryption can also be used on physical data like passwords.
+
