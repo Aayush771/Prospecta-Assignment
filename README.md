@@ -66,7 +66,7 @@ GET /products/category?category=jewelery
 ### **2. Add a New Product**
 #### Endpoint:
 ```
-POST /products/add
+POST /products
 ```
 #### Request Body:
 | Field        | Type   | Description                  |
