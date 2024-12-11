@@ -232,11 +232,6 @@ A1: 5, A2: 7, A3: 9, B1: 3, B2: 8, B3: 9, C1: 10, C2: 15, C3: 24
 
 ---
 
-## License
-This project is licensed under the MIT License. For more details, see the LICENSE file.
-
----
-
 ## Author
 Developed by Ayush Kumar.
 
