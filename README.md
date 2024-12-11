@@ -1,4 +1,4 @@
-# Combined Challenge: Fake Store API and CSV Formula Calculation
+# Challenge: Fake Store API and CSV Formula Calculation
 
 This project includes two challenges:
 
