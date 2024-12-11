@@ -158,8 +158,7 @@ A1: 5, A2: 7, A3: 9, B1: 3, B2: 8, B3: 9, C1: 10, C2: 15, C3: 24
 ## Solution Approach
 
 1. **Parsing the Input**:
-   - Read the CSV input and store it in a 2D array structure for easy access.
-   - Maintain the cell references (e.g., `A1`, `B3`) using their row and column indices.
+   -Read the CSV input and store it in a map-based structure for easy access using cell identifiers (e.g., A1, B2) as keys.
 
 2. **Evaluating the Formulas**:
    - Identify cells containing formulas (starting with `=`).
